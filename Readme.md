@@ -16,5 +16,5 @@ pip install -r requirements.txt
 To run the tests, execute the following command in your terminal:
 
 ```bash
-pytest -V
+pytest -V tc-products.py
 ```
