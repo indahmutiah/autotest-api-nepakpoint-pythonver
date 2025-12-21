@@ -19,15 +19,15 @@ pipeline {
                             sh '''
                                 cd /var/jenkins_home/workspace/autotest_py
                                 ls -la
-                                python -m pip install --upgrade pip
-                                python -m pip install -r requirements.txt
+                                python3 -m pip install -r requirements.txt
+                                python3 -m pip install -r requirements.txt
                             '''
                         }
                         
                         stage('Run Tests') {
                             sh '''
                                 cd /var/jenkins_home/workspace/autotest_py
-                                python -m pytest tc_products.py \
+                                python3 -m pytest tc_products.py \
                                 -v --alluredir=allure-results
                             '''
                         }
