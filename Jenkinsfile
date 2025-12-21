@@ -19,6 +19,7 @@ pipeline {
                             sh '''
                                 cd /var/jenkins_home/workspace/autotest_py
                                 ls -la
+                                python --version
                                 pip3 install -r requirements.txt
                             '''
                         }
