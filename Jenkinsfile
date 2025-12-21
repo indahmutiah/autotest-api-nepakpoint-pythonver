@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        allure 'allure-manual'
+        allure 'allure'
     }
 
     environment {
@@ -75,7 +75,7 @@ Skipped: ${summaryJson.statistic.skipped}
                     def message = """
 Test Automation Report
 
-Automation yang enih:  ${env.JOB_NAME}
+Automation Job:  ${env.JOB_NAME}
 Build: #${env.BUILD_NUMBER}
 Status: ${status}
 Duration: ${currentBuild.durationString}
