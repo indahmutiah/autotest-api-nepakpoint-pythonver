@@ -25,7 +25,7 @@ pipeline {
                         
                         stage('Run Tests') {
                             sh '''
-                                cd /var/jenkins_home/workspace/autotest_p
+                                cd /var/jenkins_home/workspace/autotest_py
                                 pytest tc_products.py -v --alluredir=allure-results
                             '''
                         }
@@ -86,12 +86,12 @@ Jenkins Build: ${env.BUILD_URL}
                     """.replaceAll("'", "'\\\\''")
                     
                     // Kirim Telegram
-                    sh '''
-                        curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
-                            -d chat_id=$TELEGRAM_CHAT_ID \
-                            -d disable_web_page_preview=false \
-                            -d text="$message"
-                    '''
+                    sh """
+                    curl -s -X POST https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage \
+                    -d chat_id=${TELEGRAM_CHAT_ID} \
+                    -d disable_web_page_preview=false \
+                    -d text='${message}'
+                    """
                 }
             }
         }
@@ -110,11 +110,11 @@ Build: #${env.BUILD_NUMBER}
 Console: ${env.BUILD_URL}console
                     """.replaceAll("'", "'\\\\''")
                     
-                    sh '''
-                    curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
-                    -d chat_id=$TELEGRAM_CHAT_ID \
-                    -d text='$message'
-                    '''
+                    sh """
+                    curl -s -X POST https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage \
+                    -d chat_id=${TELEGRAM_CHAT_ID} \
+                    -d text='${message}'
+                    """
                 }
             }
         }
