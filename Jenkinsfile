@@ -17,16 +17,19 @@ pipeline {
                     // docker.image('python:3.13.9-slim').inside("--network jenkins-network") {
                         stage('Install Dependencies') {
                             sh '''
+
                                 cd /var/jenkins_home/workspace/autotest_py
                                 ls -la
-                                pip install -r requirements.txt
+                                python3 --version
+                                python3 -m pip install --upgrade pip
+                                python3 -m pip install -r requirements.txt
                             '''
                         }
                         
                         stage('Run Tests') {
                             sh '''
                                 cd /var/jenkins_home/workspace/autotest_py
-                                pytest tc_products.py -v --alluredir=allure-results
+                                 python3 -m pytest tc_products.py -v --alluredir=allure-results
                             '''
                         }
                     // }
