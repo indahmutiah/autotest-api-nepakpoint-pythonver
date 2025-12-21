@@ -98,25 +98,8 @@ Jenkins Build: ${env.BUILD_URL}
     }
     
     post {
-        failure {
-            node('') {
-                script {
-                    def message = """
-Build Failed
-
-Job: ${env.JOB_NAME}
-Build: #${env.BUILD_NUMBER}
-
-Console: ${env.BUILD_URL}console
-                    """.replaceAll("'", "'\\\\''")
-                    
-                    sh """
-                    curl -s -X POST https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage \
-                    -d chat_id=${TELEGRAM_CHAT_ID} \
-                    -d text='${message}'
-                    """
-                }
-            }
+        always {
+            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
         }
     }
 }
