@@ -17,7 +17,6 @@ pipeline {
                     // docker.image('python:3.13.9-slim').inside("--network jenkins-network") {
                         stage('Install Dependencies') {
                             sh '''
-                                
                                 docker exec python-runner python -m pip install --upgrade pip
                                 docker exec python-runner python -m pip install -r $WORKSPACE/requirements.txt
                             '''
