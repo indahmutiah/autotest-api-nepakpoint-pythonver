@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk17
+    container_name: jenkins
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    networks:
+      - jenkins-net
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  python-runner:
+    image: python:3.13.9-slim
+    container_name: python-runner
+    command: sleep infinity
+    working_dir: /var/jenkins_home/workspace/autotest_py
+    command:  sleep infinity
+    networks:
+      - jenkins-net
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+networks:
+  jenkins-net:
+
+volumes:
+  jenkins_home:
