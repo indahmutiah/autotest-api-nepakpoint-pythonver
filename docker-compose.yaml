@@ -19,7 +19,6 @@ services:
     container_name: python-runner
     command: sleep infinity
     working_dir: /var/jenkins_home/workspace/autotest_py
-    command:  sleep infinity
     networks:
       - jenkins-net
     volumes:
